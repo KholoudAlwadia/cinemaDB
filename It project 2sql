@@ -1,0 +1,130 @@
+CREATE TABLE Customers
+(
+  Cust_ID INT NOT NULL,
+  First_Name VARCHAR(20) NOT NULL,
+  Last_Name VARCHAR(20) NOT NULL,
+  Cust_Email VARCHAR(50) NOT NULL,
+  Cust_Age INT NOT NULL,
+  PRIMARY KEY (Cust_ID, Cust_Age)
+);
+
+CREATE TABLE Center
+(
+  Center_ID INT NOT NULL,
+  Street_Name VARCHAR(20) NOT NULL,
+  region INT NOT NULL,
+  Zip_Postcode INT NOT NULL,
+  City VARCHAR(20) NOT NULL,
+  Country VARCHAR(20) NOT NULL,
+  Center_Name VARCHAR(20) NOT NULL,
+  Center_Number INT NOT NULL,
+  PRIMARY KEY (Center_ID)
+);
+
+CREATE TABLE Customers_Phone_Number
+(
+  Phone_Number INT NOT NULL,
+  Cust_ID INT NOT NULL,
+  Cust_Age INT NOT NULL,
+  PRIMARY KEY (Phone_Number),
+  FOREIGN KEY (Cust_ID, Cust_Age) REFERENCES Customers(Cust_ID, Cust_Age)
+);
+
+CREATE TABLE Center_Phone_Number
+(
+  Phone_Number INT NOT NULL,
+  Center_ID INT NOT NULL,
+  PRIMARY KEY (Phone_Number, Center_ID),
+  FOREIGN KEY (Center_ID) REFERENCES Center(Center_ID)
+);
+
+CREATE TABLE Employees
+(
+  Emp_ID INT NOT NULL,
+  First_Name VARCHAR(20) NOT NULL,
+  Last_Name VARCHAR(20) NOT NULL,
+  Street_Name VARCHAR(20) NOT NULL,
+  region INT NOT NULL,
+  Zip_Postcode INT NOT NULL,
+  City VARCHAR(20) NOT NULL,
+  Country VARCHAR(20) NOT NULL,
+  Emp_Email VARCHAR(50) NOT NULL,
+  Salary INT NOT NULL,
+  Job_Name VARCHAR(20) NOT NULL,
+  Center_ID INT NOT NULL,
+  PRIMARY KEY (Emp_ID),
+  FOREIGN KEY (Center_ID) REFERENCES Center(Center_ID)
+);
+
+CREATE TABLE movies
+(
+  movies_ID INT NOT NULL,
+  movies_name VARCHAR(50) not null,
+  Ending_Time INT NOT NULL,
+  Starting_Time INT NOT NULL,
+  eighteen_more INT NOT NULL,
+  less_eighteen INT NOT NULL,
+  Hall_ID INT NOT NULL,
+  movies_Cost INT NOT NULL,
+  Center_ID INT NOT NULL,
+  Emp_ID INT NOT NULL,
+  PRIMARY KEY (movies_ID, movies_name, Ending_Time, Starting_Time,eighteen_more,  less_eighteen, Hall_ID, movies_Cost, Center_ID, Emp_ID),
+  FOREIGN KEY (Center_ID) REFERENCES Center(Center_ID),
+  FOREIGN KEY (Emp_ID) REFERENCES Employees(Emp_ID),
+  UNIQUE (Ending_Time, Starting_Time)
+);
+
+CREATE TABLE Enrolls
+(
+  Enrollment_ID INT NOT NULL,
+  Payed_Money INT NOT NULL,
+  Cust_ID INT NOT NULL,
+  Cust_Age INT NOT NULL,
+  movies_ID INT NOT NULL,
+  movies_name VARCHAR(50) not null,
+  Ending_Time INT NOT NULL,
+  Starting_Time INT NOT NULL,
+  eighteen_more INT NOT NULL,
+ less_eighteen INT NOT NULL,
+  Hall_ID INT NOT NULL,
+  movies_Cost INT NOT NULL,
+  Center_ID INT NOT NULL,
+  Emp_ID INT NOT NULL,
+  PRIMARY KEY (Enrollment_ID),
+  FOREIGN KEY (Cust_ID, Cust_Age) REFERENCES Customers(Cust_ID, Cust_Age),
+  FOREIGN KEY (movies_ID,movies_name, Ending_Time, Starting_Time, eighteen_more, less_eighteen, Hall_ID, movies_Cost, Center_ID, Emp_ID) REFERENCES movies(movies_ID,movies_name, Ending_Time, Starting_Time, eighteen_more, less_eighteen, Hall_ID, movies_Cost, Center_ID, Emp_ID)
+);
+
+CREATE TABLE Employees_Phone_Number
+(
+  Phone_Number INT NOT NULL,
+  Emp_ID INT NOT NULL,
+  PRIMARY KEY (Phone_Number, Emp_ID),
+  FOREIGN KEY (Emp_ID) REFERENCES Employees(Emp_ID)
+);
+
+SELECT *
+FROM movies;
+
+alter table center modify region varchar(30);
+
+
+Insert into Center values (123, 'omar street ' , 'Buraydah' ,007 , 'Al-Qassim' , 'Saudi Arabia' , 'Cinema star', 001);
+
+Insert into Center values (124, 'King Abdulladh street' , 'Buraydah' , 008 , 'Al-Qassim' , 'Saudi Arabia' , 'Cinema star' ,002);
+
+Insert into Center values (143, 'Alqds street' , 'Riyadh' , 010 , 'Al-Riyadh' , 'Saudi Arabia' , 'Cinema star' , 003);
+
+Insert into Center values (125, 'eighteen street' , 'Jeddah' , 090 , 'Jeddah' , 'Saudi Arabia' , 'Cinema star' , 004);
+
+Insert into Center values(173, ' hour street' , 'Dhahran' , 010 , 'Al-Damam' , 'Saudi Arabia' , 'Cinema star' , 005);
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,248 @@
+CREATE TABLE Customers2
+(
+  Cust_ID INT NOT NULL,
+  First_Name varchar(40) NOT NULL,
+  Last_Name varchar(40) NOT NULL,
+  Cust_Email varchar(70) NOT NULL,
+  Cust_Age INT NOT NULL,
+  PRIMARY KEY (Cust_ID, Cust_Age)
+);
+
+
+
+
+
+
+Insert into customers2 values( 110033, 'Ahmed' , 'shfeq' , 'ahmedsha90@gmail.com' ,27);
+Insert into customers2 values( 110044, 'Mohammed' , 'khalil' , 'mohmkh94@gmail.com' ,25);
+Insert into customers2 values( 110066, 'Yassen' , 'saif' , 'yysaif12@gmail.com' ,29);
+Insert into customers2 values( 110011, 'khalid' , 'saud' , 'khals10@gmail.com' ,28);
+Insert into customers2 values( 110099, 'gawdat' , 'Edres' , 'gawed50@gmail.com' ,23);
+
+
+
+
+
+
+
+CREATE TABLE Customers_Phone_Number2
+(
+  Phone_Number INT NOT NULL,
+  Cust_ID INT NOT NULL,
+  Cust_Age INT NOT NULL,
+  PRIMARY KEY (Phone_Number),
+  FOREIGN KEY (Cust_ID, Cust_Age) REFERENCES Customers2(Cust_ID, Cust_Age)
+);
+
+
+
+
+insert into Customers_Phone_Number2 VALUES(0508325393,110033,27);
+insert into Customers_Phone_Number2 VALUES(0503578567,110044,25);
+insert into Customers_Phone_Number2 VALUES(0505873789,110066,29);
+insert into Customers_Phone_Number2 VALUES(0534678493,110011,28);
+insert into Customers_Phone_Number2 VALUES(0558332577,110099,23);
+
+
+
+
+
+
+
+
+CREATE TABLE Center2
+(
+  Center_ID INT NOT NULL,
+  Street_Name VARCHAR(50) NOT NULL,
+  region VARCHAR(50)  NOT NULL,
+  Zip_Postcode INT NOT NULL,
+  City VARCHAR(70) NOT NULL,
+  Country VARCHAR(50) NOT NULL,
+  Center_Name VARCHAR(50) NOT NULL,
+  Center_Number INT NOT NULL,
+  PRIMARY KEY (Center_ID)
+);
+
+
+
+
+
+Insert into Center2 values (123, 'omar street ' , 'Buraydah' ,007 , 'Al-Qassim' , 'Saudi Arabia' , 'Cinema star', 001);
+Insert into Center2 values (124, 'King Abdulladh street' , 'Buraydah' , 008 , 'Al-Qassim' , 'Saudi Arabia' , 'Cinema star' ,002);
+Insert into Center2 values (143, 'Alqds street' , 'Riyadh' , 010 , 'Al-Riyadh' , 'Saudi Arabia' , 'Cinema star' , 003);
+Insert into Center2 values (125, 'eighteen street' , 'Jeddah' , 090 , 'Jeddah' , 'Saudi Arabia' , 'Cinema star' , 004);
+Insert into Center2 values(173, ' hour street' , 'Dhahran' , 010 , 'Al-Damam' , 'Saudi Arabia' , 'Cinema star' , 005);
+
+
+
+
+
+
+
+
+CREATE TABLE Center_Phone_Number2
+(
+  Phone_Number INT NOT NULL,
+  Center_ID INT NOT NULL,
+  PRIMARY KEY (Phone_Number),
+  FOREIGN KEY (Center_ID) REFERENCES Center2(Center_ID)
+);
+
+
+
+INSERT INTO Center_Phone_Number2 VALUES (053768572,123);
+INSERT INTO Center_Phone_Number2 VALUES (050485529,124);
+INSERT INTO Center_Phone_Number2 VALUES (053882575,143);
+INSERT INTO Center_Phone_Number2 VALUES (055643572,125);
+INSERT INTO Center_Phone_Number2 VALUES (050962585,173);
+
+
+
+
+
+
+CREATE TABLE Employees2
+(
+  Emp_ID INT NOT NULL,
+  First_Name varchar(40) NOT NULL,
+  Last_Name varchar(40) NOT NULL,
+  Street_Name varchar(40) NOT NULL,
+  region varchar(70) NOT NULL,
+  Zip_Postcode INT NOT NULL,
+  City varchar(40) NOT NULL,
+  Country varchar(40) NOT NULL,
+  Emp_Email varchar(90) NOT NULL,
+  Salary INT NOT NULL,
+  Job_Name varchar(40) NOT NULL,
+  Center_ID INT NOT NULL,
+  PRIMARY KEY (Emp_ID),
+  FOREIGN KEY (Center_ID) REFERENCES Center2(Center_ID)
+);
+
+
+
+
+Insert into Employees2 values(1,'Ali','khaled','King Abdulaziz','Buraydah',098,'Al-Qassim',' Saudi Arabia','Ali@gmail.com',3550,'Accountant',123);
+Insert into Employees2 values(2,'Ahmad','omar','Othman Bin-Affan','Buraydah',015,'Al-Qassim',' Saudi Arabia','Ahmad@gmail.com',4550,'Recepion',124);
+Insert into Employees2 values(3,'yazn','mohammd','King Abdullah','Buraydah',058,'Al-Qassim',' Saudi Arabia','yazn@gmail.com',5850,'organization',143);
+Insert into Employees2 values(4,'Noor','Naif','King Faisal','Jeddah',013,'Jeddah',' Saudi Arabia','noor@gmail.com',3200,'Waiter',125);
+Insert into Employees2 values(5,'ziad','turki','King khaled','Dhahran',058,'Al-Damam',' Saudi Arabia','ziad@gmail.com',5850,'organization',173);
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE Employees_Phone_Number2
+(
+  Phone_Number INT NOT NULL,
+  Emp_ID INT NOT NULL,
+  PRIMARY KEY (Phone_Number),
+  FOREIGN KEY (Emp_ID) REFERENCES Employees2(Emp_ID)
+  
+  
+);
+
+
+
+
+INSERT INTO Employees_Phone_Number2 VALUES (0537685732,1);
+INSERT INTO Employees_Phone_Number2 VALUES (0537635697,2);
+INSERT INTO Employees_Phone_Number2 VALUES (0558638294,3);
+INSERT INTO Employees_Phone_Number2 VALUES (0535758368,4);
+INSERT INTO Employees_Phone_Number2 VALUES (0507683572,5);
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE movies2
+(
+  movies_ID INT NOT NULL,
+  movies_name varchar(40) not null,
+  Starting_Time varchar(40) NOT NULL,
+  Ending_Time varchar(40) NOT NULL,
+ mini_age int NOT NULL,
+  Hall_ID INT NOT NULL,
+  movies_Cost INT NOT NULL,
+  Center_ID INT NOT NULL,
+  Emp_ID INT NOT NULL,
+  PRIMARY KEY (movies_ID, movies_name , Starting_Time, Ending_Time,mini_age, Hall_ID, movies_Cost),
+  FOREIGN KEY (Center_ID) REFERENCES Center2(Center_ID),
+  FOREIGN KEY (Emp_ID) REFERENCES Employees2(Emp_ID),
+  UNIQUE (Ending_Time, Starting_Time)
+);
+
+
+
+
+Insert into movies2 values(11,'frozen','2019-6-27 09:00pm','2019-6-27 11:00pm',8,012,550,123,1);
+Insert into movies2 values(12,'dumbo','2019-7-2 09:00pm','2019-7-2 11:00pm',9,015,460,124,2);
+Insert into movies2 values(13,'descendants','2019-7-30 08:00pm','2019-7-30 10:00pm',15,12,800,143,3);
+Insert into movies2 values(14,'tangled','2019-8-10 07:30pm','2019-8-10 8:45pm',7,022,500,125,4);
+Insert into movies2 values(15,'SnowWhite','2019-8-20 09:30pm','2019-8-20 10:40pm',10,009,770,173,5);
+
+
+
+
+
+
+CREATE TABLE Enroll2
+(
+  Enrollment_ID INT NOT NULL,
+  Payed_Money INT NOT NULL,
+  Cust_ID INT NOT NULL,
+  Cust_Age INT NOT NULL,
+   movies_ID INT NOT NULL,
+  movies_name varchar(50) not null,
+  Starting_Time varchar(50) NOT NULL,
+  Ending_Time varchar(50) NOT NULL,
+  mini_age int NOT NULL,
+  Hall_ID INT NOT NULL,
+  movies_Cost INT NOT NULL,
+  Center_ID INT NOT NULL,
+  Emp_ID INT NOT NULL,
+  PRIMARY KEY (Enrollment_ID),
+  FOREIGN KEY (Cust_ID, Cust_Age) REFERENCES Customers2(Cust_ID, Cust_Age),
+  FOREIGN KEY (movies_ID, movies_name , Starting_Time, Ending_Time, mini_age, Hall_ID, movies_Cost) REFERENCES movies2(movies_ID, movies_name , Starting_Time, Ending_Time,mini_age, Hall_ID, movies_Cost),
+ check((Cust_Age > Mini_Age)and (Payed_Money = movies_Cost))
+ );
+
+
+insert into Enroll2 values(11077,550,110033,27,11,'frozen','2019-6-27 09:00pm','2019-6-27 11:00pm',8,012,550,123,1);
+insert into Enroll2 values(11066,460,110044,25,12,'dumbo','2019-7-2 09:00pm','2019-7-2 11:00pm',9,015,460,124,2);
+insert into Enroll2 values(11088,800,110066,29,13,'descendants','2019-7-30 08:00pm','2019-7-30 10:00pm',15,12,800,143,3);
+insert into Enroll2 values(11022,500,110011,28,14,'tangled','2019-8-10 07:30pm','2019-8-10 8:45pm',7,022,500,125,4);
+insert into Enroll2 values(11055,770,110099,23,15,'SnowWhite','2019-8-20 09:30pm','2019-8-20 10:40pm',10,009,770,173,5);
+
+
+***********************************************************************************************************************************
+
+
+Create view movies_in_each_centers as 
+Select movies_name , Center_ID,movies_Cost
+From movies2 ;
+
+
+
+
+Create view Employees_info as 
+Select First_Name ,Last_Name ,Job_Name, Center_ID
+From Employees2 ;
+
+
+Create view customers_info as 
+Select Cust_ID ,Cust_Age,Payed_Money
+From customers2,Enroll2 ;
+
+
+*************************************************************************************************************************************
